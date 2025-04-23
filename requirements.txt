@@ -1,0 +1,11 @@
+numpy<2.0
+torch==2.2.2
+torchvision==0.17.2+cu121 --index-url https://download.pytorch.org/whl/cu121
+mediapipe
+opencv-python
+transformers==4.40.0
+datasets==2.19.1
+streamlit
+streamlit-webrtc
+SpeechRecognition
+pyaudio
