@@ -11,14 +11,15 @@ from transformers import AutoTokenizer
 from LSTM_Load_Dataset import EmotionLandmarkDataset
 from collections import defaultdict
 import matplotlib.pyplot as plt
+import os
 
 SEQ_LENGTH = 30
 INPUT_SIZE = 1434
 HIDDEN_SIZE = 128
 NUM_LAYERS = 2
-LANDMARK_MODEL_PATH = "models/landmarks_lstm.pt"
-TEXT_MODEL_PATH = "models/text_cnn.pt"
-DATA_DIR = "./data/npz"
+LANDMARK_MODEL_PATH = os.environ.get("MODEL_PATH", "models/landmarks_lstm.pt")
+TEXT_MODEL_PATH = os.environ.get("TEXT_MODEL_PATH", "models/text_cnn.pt")
+DATA_DIR = os.environ.get("DATA_DIR", "./data/npz")
 TEXT_EMOTIONS = ["sadness", "joy", "love", "anger", "fear", "surprise"]
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -87,7 +88,7 @@ last_spoken_time = time.time()
 lock = threading.Lock()
 
 st.set_page_config(page_title="Sensora - Real-Time Emotion Detection", layout="wide")
-st.title("Sensora: Emotion Recognition")
+st.title("Sensora v2 - Real-time Emotion Recognition")
 
 left_col, mid_col, right_col = st.columns([3, 0.05, 1])
 

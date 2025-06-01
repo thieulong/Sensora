@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sensora-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sensora
+  template:
+    metadata:
+      labels:
+        app: sensora
+    spec:
+      serviceAccountName: sensora-sa
+      containers:
+      - name: sensora
+        image: localhost:32000/sensora:v1
+        ports:
+        - containerPort: 8501
+        env:
+        - name: MODEL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: sensora-config
+              key: MODEL_PATH
+        - name: TEXT_MODEL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: sensora-config
+              key: TEXT_MODEL_PATH
+        - name: DATA_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: sensora-config
+              key: DATA_DIR
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"

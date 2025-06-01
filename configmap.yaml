@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sensora-config
+data:
+  MODEL_PATH: "/app/models/landmarks_lstm.pt"
+  TEXT_MODEL_PATH: "/app/models/text_cnn.pt"
+  DATA_DIR: "/app/data/npz"
